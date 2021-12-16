@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
   const bgImg = document.querySelector('.bg-img');
   const nextSong = document.querySelector('.next');
   const prevSong = document.querySelector('.prev');
-  const titleName = document.querySelector('h3')
+  const titleName = document.querySelector('h3');
   
   // other values
   const timerDuration = Math.floor(audio.duration)
@@ -26,7 +26,6 @@ window.addEventListener("load", () => {
 
   getZero = x => +x < 10 ? `0${x}` : x
   setTimerEnd = (s) => timerEnd.innerHTML = `${getZero(Math.floor(s / 60))}:${getZero(s % 60)}`
-  setTimeout(() =>setTimerEnd(Math.floor(audio.duration)), 10)
 
   // button swap animation
 
@@ -54,7 +53,7 @@ window.addEventListener("load", () => {
   // switch song
 
   let index = 0;
-
+ 
   setNewItems = (i) => {
     bgImg.style.backgroundImage = `url(${listOfBackgrounds[index]})`
     audioWindow.style.backgroundImage = `url(${listOfBackgrounds[index]})`
@@ -66,14 +65,14 @@ window.addEventListener("load", () => {
   nextSong.addEventListener('click', () => {
     audio.classList.contains('active') ? audio.autoplay = "true" : audio.autoplay = "" 
     index += 1
-    index >= listOfBackgrounds.length ? index = 0 : null
+    index === listOfMusic.length ? index = 0 : null
     setNewItems(index)
   })
 
   prevSong.addEventListener('click', () => {
     audio.classList.contains('active') ? audio.autoplay = "true" : audio.autoplay = "" 
     index -= 1
-    index < 0 ? index = 2 : null
+    index < 0 ? index = listOfMusic.length - 1 : null
     setNewItems(index)
   })
 
