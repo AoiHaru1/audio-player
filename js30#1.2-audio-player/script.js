@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
   const audio = document.querySelector('audio');
   const playButton = document.querySelector('.play img');
   const timerEnd = document.querySelector('.rageInput__endTime');
-  const timerStart = document.querySelector('.rangeInput__currentTime')
+  const timerStart = document.querySelector('.rangeInput__currentTime');
   const bgImg = document.querySelector('.bg-img');
   const nextSong = document.querySelector('.next');
   const prevSong = document.querySelector('.prev');
@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
   // set volume to low
   audio.volume = 0.01;
 
-  // set timer end
+  // set timer end/start
 
   getZero = x => +x < 10 ? `0${x}` : x
   setTimerEnd = (e) => timerEnd.innerHTML = `${getZero(Math.floor(e / 60))}:${getZero(e % 60)}`
@@ -48,15 +48,13 @@ window.addEventListener("load", () => {
       clearInterval(inputInetrval)
     } else {
       audio.play()
-      inputInetrval = setInterval(inputChangeOnPlay, 1000)
+      inputInetrval = setInterval(inputChangeOnPlay, 100)
     }
     audio.classList.toggle('active')
     swapButtonIcons()
   })
 
   // switch song
-
-  nextSong.click()
 
   let index = 0;
 
@@ -67,7 +65,7 @@ window.addEventListener("load", () => {
     titleName.innerHTML = listOfNames[index];
     inputRange.value = 0;
     currentTimer = 0;
-    setTimerStart(currentTimer)
+    setTimerStart(currentTimer);
     setTimeout(setInputRange, 50);
     setTimeout(() => setTimerEnd(Math.floor(audio.duration)), 20);
   }
@@ -89,31 +87,49 @@ window.addEventListener("load", () => {
   // input implement
   let inputInetrval;
   let currentTimer = 0;
-
-  setInputRange = () => inputRange.max = Math.floor(+audio.duration)
+  let secondTracker = 0;
+  
+  setInputRange = () => inputRange.max = (Math.floor(+audio.duration * 10))
 
   inputChangeOnPlay = () => {
-    inputRange.value = +inputRange.value + 1;
-    currentTimer += 1
-    setTimerStart(currentTimer)
-    if (+inputRange.value == +inputRange.max) {
-      setTimeout(() => {
-        audio.classList.contains('active') ? audio.autoplay = "true" : audio.autoplay = ""
+    setInputRange()
+    secondTracker = secondTracker + 0.1
+    secondTracker = +secondTracker.toFixed(1)
+
+    if (secondTracker % 1 === 0) {
+      inputRange.value = +inputRange.value + 10
+    }
+
+    currentTimer += 0.1
+
+    setTimerStart(Math.floor(currentTimer))
+
+    if (timerStart.innerHTML == timerEnd.innerHTML) {
+      clearInterval(inputInetrval)
+
+        secondTracker = 0;
+        if (audio.classList.contains('active')) {
+          audio.autoplay = "true";
+          inputInetrval = setInterval(inputChangeOnPlay, 100);
+        } else {
+          audio.autoplay = ""
+        }
         index += 1
         index === listOfMusic.length ? index = 0 : null
         setNewItems(index)
-      }, 500)
+
     }
   }
 
   inputRange.addEventListener('input', () => {
-    currentTimer = +inputRange.value
+    clearInterval(inputInetrval)
+    currentTimer = Math.floor(+inputRange.value / 10)
     setTimerStart(currentTimer)
-    console.log(inputRange.value)
   })
 
   inputRange.addEventListener('change', () => {
-    audio.currentTime = +inputRange.value
+    audio.classList.contains('active') ? inputInetrval = setInterval(inputChangeOnPlay, 100) : null
+    audio.currentTime = Math.floor(+inputRange.value / 10)
   })
 
 
