@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
     setTimeout(() => {
       playButton.style.opacity = 1;
       audio.classList.contains('active') ? playButton.src = "./assets/buttons/pause-button.png" : playButton.src = "./assets/buttons/play-button.png";
-    }, 1);
+    }, 300);
   };
 
   // audio implement
@@ -53,7 +53,7 @@ window.addEventListener("load", () => {
     swapButtonIcons();
   });
 
-  // switch song
+  // set new song
 
   let index = 0;
 
@@ -67,6 +67,8 @@ window.addEventListener("load", () => {
     setTimerStart(currentTimer);
     setTimeout(() => setTimerEnd(Math.floor(audio.duration)), 20);
   };
+
+  // listeners for button change
 
   nextSong.addEventListener('click', () => {
     audio.classList.contains('active') ? audio.autoplay = "true" : audio.autoplay = "";
@@ -100,6 +102,8 @@ window.addEventListener("load", () => {
     timerStart.innerHTML == timerEnd.innerHTML ? songChanger() : null;
   };
 
+// implement song changer
+
   const songChanger = () => {
       clearInterval(inputInterval);
       secondTracker = 0;
@@ -127,6 +131,8 @@ window.addEventListener("load", () => {
       clearInterval(inputInterval);
     }
   };
+
+  // input listeners
 
   inputRange.addEventListener('input', () => {
     if (activeIntervalCheck === false) {
