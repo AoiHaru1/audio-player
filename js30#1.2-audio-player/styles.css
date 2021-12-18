@@ -15,7 +15,7 @@ p {
 .bg-img {
   background-image: url("./assets/img/Diplo\,\ SIDEPIECE\ -\ On\ My\ Mind.png");
   filter: blur(8px) brightness(0,4) contrast(100%) sepia(2%) grayscale(90%);
-  -webkit-filter: blur(3px) contrast(100%) sepia(2%) grayscale(90%) opacity(90%);
+  -webkit-filter: blur(0px) contrast(150%) sepia(10%) grayscale(600%) opacity(80%);
   height: 100vh;
   min-height: 450px;
   background-position: center;
@@ -53,7 +53,7 @@ p {
 
 .audio-player {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.815);
   position: absolute;
@@ -81,6 +81,7 @@ p {
 
 h3 {
   display: block;
+  width: 70%;
   text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
   position: absolute;
   top: -60%;

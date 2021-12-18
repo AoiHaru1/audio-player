@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
 
   // other values
   const timerDuration = Math.floor(audio.duration);
-  const listOfMusic = ["Diplo, SIDEPIECE - On My Mind", "Eluveitie - Brictom", "Flobots - Handlebars"];
+  const listOfMusic = ["Diplo, SIDEPIECE - On My Mind", "Eluveitie - Brictom", "Flobots - Handlebars", "Radiohead — Karma Police", "The Birthday Massacre - Red Stars"];
 
 
   // set volume to low
@@ -22,7 +22,6 @@ window.addEventListener("load", () => {
 
   // get song path func
 
-  getSongName = item => item.slice(0, -4);
   getBgName = item => './assets/img/' + item + '.png';
   getSongPath = item => './assets/audio/' + item + '.mp3'
 
@@ -70,7 +69,7 @@ window.addEventListener("load", () => {
     bgImg.style.backgroundImage = `url('${getBgName(listOfMusic[index])}')`;
     audioWindow.style.backgroundImage = `url('${getBgName(listOfMusic[index])}')`;
     audio.src = getSongPath(listOfMusic[index]);
-    titleName.innerHTML =  getSongName(listOfMusic[index]);
+    titleName.innerHTML = listOfMusic[index];
     inputRange.value = 0;
     currentTimer = 0;
     setTimerStart(currentTimer);
