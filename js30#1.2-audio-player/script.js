@@ -11,6 +11,8 @@ window.addEventListener("load", () => {
   const prevSong = document.querySelector('.prev');
   const titleName = document.querySelector('h3');
   const inputRange = document.querySelector('.audio-range');
+  const volumeRange = document.querySelector('.volume-input');
+  const volumeImg = document.querySelector('.volume-image')
 
   // other values
   const timerDuration = Math.floor(audio.duration);
@@ -18,7 +20,7 @@ window.addEventListener("load", () => {
 
 
   // set volume to low
-  audio.volume = 0.01;
+  audio.volume = 0.1;
 
   // get song path func
 
@@ -86,7 +88,7 @@ window.addEventListener("load", () => {
 
   prevSong.addEventListener('click', () => {
     getActiveState() ? audio.autoplay = "true" : audio.autoplay = "";
-    index = index - 1 < 0 ? listOfMusic.length - 1 : index - 1 
+    index = index - 1 < 0 ? listOfMusic.length - 1 : index - 1
     setNewItems(index);
   });
 
@@ -108,19 +110,19 @@ window.addEventListener("load", () => {
     timerStart.innerHTML == timerEnd.innerHTML ? songChanger() : null;
   };
 
-// implement song changer
+  // implement song changer
 
   const songChanger = () => {
-      clearInterval(inputInterval);
-      secondTracker = 0;
-      if (getActiveState()) {
-        audio.autoplay = "true";
-        inputInterval = setInterval(inputChangeOnPlay, 100);
-      } else {
-        audio.autoplay = "";
-      }
-      index = (index + 1) % listOfMusic.length
-      setNewItems(index);
+    clearInterval(inputInterval);
+    secondTracker = 0;
+    if (getActiveState()) {
+      audio.autoplay = "true";
+      inputInterval = setInterval(inputChangeOnPlay, 100);
+    } else {
+      audio.autoplay = "";
+    }
+    index = (index + 1) % listOfMusic.length
+    setNewItems(index);
   };
 
   // song changer on slider hold
@@ -141,8 +143,8 @@ window.addEventListener("load", () => {
 
   inputRange.addEventListener('input', () => {
     if (activeIntervalCheck === false) {
-    activeIntervalCheck = true;
-    songEnderInt = setInterval(songEnderChecker, 200);
+      activeIntervalCheck = true;
+      songEnderInt = setInterval(songEnderChecker, 200);
     }
     setInputRange();
     clearInterval(inputInterval);
@@ -155,6 +157,45 @@ window.addEventListener("load", () => {
     audio.currentTime = Math.floor(+inputRange.value / 10);
   });
 
+
+  //  implement volume change
+
+  let volumeMuteState = false;
+  let lastValueStore;
+  
+  lowValueChecker = x => x < 10 ? `0.0${x}` : `0.${x}`;
+
+  swapVolumeIcons = () => volumeImg.src = volumeMuteState ? "./assets/buttons/mute.png" : "./assets/buttons/volume.png"
+
+  volumeRange.addEventListener('input', () => {
+    lastValueStore = volumeRange.value
+    audio.volume = lowValueChecker(volumeRange.value)
+    if (volumeRange.value >= 1) {
+      volumeMuteState = false;
+      swapVolumeIcons()
+    }
+    if (volumeRange.value == 0) {
+      volumeMuteState = true;
+      swapVolumeIcons()
+    }
+  })
+  
+  volumeImg.addEventListener('click', () => {
+    if (lastValueStore == 0) {
+      swapVolumeIcons()
+    } else if (!volumeMuteState) {
+      volumeMuteState = true;
+      lastValueStore = volumeRange.value
+      volumeRange.value = 0;
+      audio.volume = 0;
+      swapVolumeIcons()
+    } else {
+      volumeRange.value = lastValueStore
+      audio.volume = lowValueChecker(lastValueStore)
+      volumeMuteState = false;
+      swapVolumeIcons()
+    }
+  })
 
 });
 

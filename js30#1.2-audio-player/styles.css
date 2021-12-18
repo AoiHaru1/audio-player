@@ -15,7 +15,7 @@ p {
 .bg-img {
   background-image: url("./assets/img/Diplo\,\ SIDEPIECE\ -\ On\ My\ Mind.png");
   filter: blur(8px) brightness(0,4) contrast(100%) sepia(2%) grayscale(90%);
-  -webkit-filter: blur(0px) contrast(150%) sepia(10%) grayscale(600%) opacity(80%);
+  -webkit-filter: blur(0px) contrast(200%) sepia(10%) grayscale(600%) opacity(80%);
   height: 100vh;
   min-height: 450px;
   background-position: center;
@@ -32,7 +32,6 @@ p {
 	outline: inherit;
   position: relative
 }
-
 
 .change-buttons {
   display: flex;
@@ -145,6 +144,32 @@ input::-webkit-slider-thumb {
   position: absolute;
   bottom: 27px;
   left: 80%;
+}
+
+.audio-player__volume {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  top: 504px;
+  left: 40%;
+  height: 10px;
+}
+
+.audio-player__volume input {
+  width: 127px;
+  height: 3px;
+}
+
+.audio-player__volume input::-webkit-slider-thumb {
+  box-shadow: -120px 0 0 120px rgba(0, 0, 0, 0.507);
+  height: 3px;
+  width: 3px;
+}
+
+.volume img {
+  width: 17px;
+  height: 17px;
 }
 
 
