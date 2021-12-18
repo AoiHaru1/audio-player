@@ -14,20 +14,28 @@ window.addEventListener("load", () => {
 
   // other values
   const timerDuration = Math.floor(audio.duration);
-  const listOfMusic = ["./assets/audio/Diplo, SIDEPIECE - On My Mind.mp3", "./assets/audio/Eluveitie - Brictom.mp3",
-    "./assets/audio/Flobots - Handlebars.mp3"];
-  const listOfBackgrounds = ["'./assets/img/Diplo\,\ SIDEPIECE\ -\ On\ My\ Mind.png'", "'./assets/img/Eluveitie\ -\ Brictom.png'",
-    "'./assets/img/Flobots\ -\ Handlebars.png'"];
-  const listOfNames = ["SIDEPIECE - On My Mind", "Eluveitie - Brictom", "Flobots - Handlebars"];
+  const listOfMusic = ["Diplo, SIDEPIECE - On My Mind", "Eluveitie - Brictom", "Flobots - Handlebars"];
+
 
   // set volume to low
   audio.volume = 0.01;
 
+  // get song path func
+
+  getSongName = item => item.slice(0, -4);
+  getBgName = item => './assets/img/' + item + '.png';
+  getSongPath = item => './assets/audio/' + item + '.mp3'
+
   // set timer end/start
 
   const getZero = x => +x < 10 ? `0${x}` : x;
-  const setTimerEnd = (e) => timerEnd.innerHTML = `${getZero(Math.floor(e / 60))}:${getZero(e % 60)}`;
-  const setTimerStart = (s) => timerStart.innerHTML = `${getZero(Math.floor(s / 60))}:${getZero(s % 60)}`;
+  const getNum = (s) => `${getZero(Math.floor(s / 60))}:${getZero(s % 60)}`
+  const setTimerEnd = (e) => timerEnd.innerHTML = getNum(e);
+  const setTimerStart = (e) => timerStart.innerHTML = getNum(e);
+
+  // is active check 
+
+  getActiveState = () => audio.classList.contains('active')
 
   // button swap animation
 
@@ -35,14 +43,15 @@ window.addEventListener("load", () => {
     playButton.style.opacity = 0;
     setTimeout(() => {
       playButton.style.opacity = 1;
-      audio.classList.contains('active') ? playButton.src = "./assets/buttons/pause-button.png" : playButton.src = "./assets/buttons/play-button.png";
+      getActiveState() ? playButton.src = "./assets/buttons/pause-button.png" : playButton.src = "./assets/buttons/play-button.png";
     }, 300);
   };
+
 
   // audio implement
 
   playButton.addEventListener('click', () => {
-    if (audio.classList.contains('active')) {
+    if (getActiveState()) {
       audio.pause();
       clearInterval(inputInterval);
     } else {
@@ -58,29 +67,27 @@ window.addEventListener("load", () => {
   let index = 0;
 
   const setNewItems = (i) => {
-    bgImg.style.backgroundImage = `url(${listOfBackgrounds[index]})`;
-    audioWindow.style.backgroundImage = `url(${listOfBackgrounds[index]})`;
-    audio.src = listOfMusic[index];
-    titleName.innerHTML = listOfNames[index];
+    bgImg.style.backgroundImage = `url('${getBgName(listOfMusic[index])}')`;
+    audioWindow.style.backgroundImage = `url('${getBgName(listOfMusic[index])}')`;
+    audio.src = getSongPath(listOfMusic[index]);
+    titleName.innerHTML =  getSongName(listOfMusic[index]);
     inputRange.value = 0;
     currentTimer = 0;
     setTimerStart(currentTimer);
-    setTimeout(() => setTimerEnd(Math.floor(audio.duration)), 20);
+    setTimeout(() => setTimerEnd(Math.floor(audio.duration)), 40);
   };
 
   // listeners for button change
 
   nextSong.addEventListener('click', () => {
-    audio.classList.contains('active') ? audio.autoplay = "true" : audio.autoplay = "";
-    index += 1;
-    index === listOfMusic.length ? index = 0 : null;
+    getActiveState() ? audio.autoplay = "true" : audio.autoplay = "";
+    index = (index + 1) % listOfMusic.length
     setNewItems(index);
   });
 
   prevSong.addEventListener('click', () => {
-    audio.classList.contains('active') ? audio.autoplay = "true" : audio.autoplay = "";
-    index -= 1;
-    index < 0 ? index = listOfMusic.length - 1 : null;
+    getActiveState() ? audio.autoplay = "true" : audio.autoplay = "";
+    index = index - 1 < 0 ? listOfMusic.length - 1 : index - 1 
     setNewItems(index);
   });
 
@@ -107,14 +114,13 @@ window.addEventListener("load", () => {
   const songChanger = () => {
       clearInterval(inputInterval);
       secondTracker = 0;
-      if (audio.classList.contains('active')) {
+      if (getActiveState()) {
         audio.autoplay = "true";
         inputInterval = setInterval(inputChangeOnPlay, 100);
       } else {
         audio.autoplay = "";
       }
-      index += 1;
-      index === listOfMusic.length ? index = 0 : null;
+      index = (index + 1) % listOfMusic.length
       setNewItems(index);
   };
 
@@ -146,7 +152,7 @@ window.addEventListener("load", () => {
   });
 
   inputRange.addEventListener('change', () => {
-    audio.classList.contains('active') ? inputInterval = setInterval(inputChangeOnPlay, 100) : null;
+    getActiveState() ? inputInterval = setInterval(inputChangeOnPlay, 100) : null;
     audio.currentTime = Math.floor(+inputRange.value / 10);
   });
 
