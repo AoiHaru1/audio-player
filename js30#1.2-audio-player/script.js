@@ -68,10 +68,10 @@ window.addEventListener("load", () => {
   let index = 0;
 
   const setNewItems = (i) => {
-    bgImg.style.backgroundImage = `url('${getBgName(listOfMusic[index])}')`;
-    audioWindow.style.backgroundImage = `url('${getBgName(listOfMusic[index])}')`;
-    audio.src = getSongPath(listOfMusic[index]);
-    titleName.innerHTML = listOfMusic[index];
+    bgImg.style.backgroundImage = `url('${getBgName(listOfMusic[i])}')`;
+    audioWindow.style.backgroundImage = `url('${getBgName(listOfMusic[i])}')`;
+    audio.src = getSongPath(listOfMusic[i]);
+    titleName.innerHTML = listOfMusic[i];
     inputRange.value = 0;
     currentTimer = 0;
     setTimerStart(currentTimer);
