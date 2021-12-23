@@ -17,7 +17,7 @@ p {
   filter: blur(8px) brightness(0,4) contrast(100%) sepia(2%) grayscale(90%);
   -webkit-filter: blur(0px) contrast(200%) sepia(10%) grayscale(600%) opacity(80%);
   height: 100vh;
-  min-height: 450px;
+  min-height: 550px;
   background-position: center;
   background-size: cover;
 }
@@ -121,7 +121,7 @@ input {
 input::-webkit-slider-thumb {
   display: inherit;
   box-shadow: -125px 0 0 120px rgba(0, 0, 0, 0.507);
-  height: 6px;
+  height: 5px;
   width: 6px;
   background: #000000;
   cursor: pointer;
@@ -171,6 +171,36 @@ input::-webkit-slider-thumb {
   width: 17px;
   height: 17px;
 }
+
+footer{
+  position: fixed;
+  width: 100%;
+  top: 92%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.rsschool {
+  width: 100px;
+}
+
+.date {
+  font-weight: bold;
+  font-size: 30px;
+  text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+.github {
+  width: 60px;
+  height: 60px;
+}
+
+@media (max-height: 600px) {
+  footer {
+    display: none;
+  }
+}
+
 
 
 
