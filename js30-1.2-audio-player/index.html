@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
+  <title>Auido Player</title>
+</head>
+
+<body>
+  <div class="bg-img"></div>
+  <div class="container">
+    <div class="audio-player">
+      <div class="audio-player__image-window">
+        <h1 class="audio-player__song-title"></h1>
+      </div>
+      <div class="audio-player__controls">
+        <h3>Diplo, SIDEPIECE - On My Mind</h3>
+        <audio src="./assets/audio/Diplo, SIDEPIECE - On My Mind.mp3" preload="metadata"></audio>
+        <div class="audio-player__buttons">
+          <button class="audio-player__button play"><img src="./assets/buttons/play-button.png" alt="play"></button>
+        </div>
+        <div class="rangeInput">
+          <p class="rangeInput__currentTime">00:00</p>
+          <input type="range" class="audio-range" value="0" step="1" max="189">
+          <p class="rageInput__endTime">03:09</p>
+        </div>
+        <div class="change-buttons">
+          <button class="audio-player__button next"><img src="./assets/buttons/next.png" alt="next"></button>
+          <button class="audio-player__button prev"><img src="./assets/buttons/back.png" alt="previous"></button>
+        </div>
+      </div>
+      <div class="audio-player__volume">
+        <button class="audio-player__button volume"><img src="./assets/buttons/volume.png" alt="volume" class="volume-image"></button>
+        <input type="range" class="volume-input" value="10" step="1" max="99">
+      </div>
+      <div class="modal"></div>
+    </div>
+      <footer>
+      <a href="https://rs.school/js-stage0/"><img src="./assets/img/rs_school_js.svg" alt="school" class="rsschool"></a>
+      <span class="date">2021</span>
+      <a href="https://github.com/AoiHaru1"> <img class="github" src="./assets/img/GitHub-Mark-Light-64px.png" alt="github"></a>
+      </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
