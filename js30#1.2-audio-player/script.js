@@ -1,6 +1,6 @@
 window.addEventListener("load", () => {
 
-  // elements
+  // elements;
   const audioWindow = document.querySelector('.audio-player__image-window');
   const audio = document.querySelector('audio');
   const playButton = document.querySelector('.play img');
