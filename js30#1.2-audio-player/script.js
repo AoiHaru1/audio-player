@@ -66,6 +66,7 @@ window.addEventListener("load", () => {
   // set new song
 
   let index = 0;
+  let endTimeInterval;
 
   const setNewItems = (i) => {
     bgImg.style.backgroundImage = `url('${getBgName(listOfMusic[i])}')`;
@@ -75,7 +76,15 @@ window.addEventListener("load", () => {
     inputRange.value = 0;
     currentTimer = 0;
     setTimerStart(currentTimer);
-    setTimeout(() => setTimerEnd(Math.floor(audio.duration)), 40);
+    endTimeInterval = setInterval(() => {
+      let time = setTimerEnd(Math.floor(audio.duration));
+      if (time === 'NaN:NaN') {
+        timerEnd.innerHTML = 'loading'
+      } else {
+        clearInterval(endTimeInterval)
+      }
+      console.log('check')
+    }, 40);
   };
 
   // listeners for button change
