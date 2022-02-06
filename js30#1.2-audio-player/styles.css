@@ -138,6 +138,7 @@ input::-webkit-slider-thumb {
 .rangeInput__currentTime {
   position: absolute;
   bottom: -5px;
+  width: 42px;
 }
 
 .rageInput__endTime {

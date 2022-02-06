@@ -82,7 +82,7 @@ window.addEventListener("load", () => {
         timerEnd.innerHTML = 'loading';
       } else {
         clearInterval(endTimeInterval);
-        setTimerStart(currentTimer);
+        setTimerStart(Math.floor(currentTimer));
       }
     }, 40);
   };
