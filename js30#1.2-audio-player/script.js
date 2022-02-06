@@ -75,15 +75,15 @@ window.addEventListener("load", () => {
     titleName.innerHTML = listOfMusic[i];
     inputRange.value = 0;
     currentTimer = 0;
-    setTimerStart(currentTimer);
+    clearInterval(endTimeInterval);
     endTimeInterval = setInterval(() => {
       let time = setTimerEnd(Math.floor(audio.duration));
       if (time === 'NaN:NaN') {
-        timerEnd.innerHTML = 'loading'
+        timerEnd.innerHTML = 'loading';
       } else {
-        clearInterval(endTimeInterval)
+        clearInterval(endTimeInterval);
+        setTimerStart(currentTimer);
       }
-      console.log('check')
     }, 40);
   };
 
